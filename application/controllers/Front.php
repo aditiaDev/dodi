@@ -50,7 +50,6 @@ class Front extends CI_Controller
     $this->db->limit($rowperpage, $rowno);
     $users_record = $this->db->query("SELECT * FROM tb_barang 
         WHERE id_kategori LIKE '%" . $this->input->get('kategori') . "%'
-        AND merk LIKE '%" . $this->input->get('merk') . "%'
         AND nm_barang LIKE '%" . $this->input->get('barang') . "%'
         AND stock > 0
         ")->result_array();
@@ -97,7 +96,7 @@ class Front extends CI_Controller
       return false;
     }
 
-    $cek_barang = $this->db->query("select count(*) as cek_barang from tb_temp_chart WHERE id_barang='" . $this->input->post('id_barang') . "' AND id_user='" . $this->session->userdata('id_user') . "'")->row()->cek_barang;
+    $cek_barang = $this->db->query("select count(*) as cek_barang from tb_temp_item WHERE id_barang='" . $this->input->post('id_barang') . "' AND id_user='" . $this->session->userdata('id_user') . "'")->row()->cek_barang;
     if ($cek_barang == 0) {
       $data = array(
         "id_barang" => $this->input->post('id_barang'),
@@ -105,10 +104,10 @@ class Front extends CI_Controller
         "qty" => 1,
         "harga" => $this->input->post('harga'),
       );
-      $this->db->insert('tb_temp_chart', $data);
+      $this->db->insert('tb_temp_item', $data);
     } else {
       $this->db->query("
-        UPDATE tb_temp_chart SET qty = qty+1 
+        UPDATE tb_temp_item SET qty = qty+1 
         WHERE id_barang = '" . $this->input->post('id_barang') . "'
         AND id_user = '" . $this->session->userdata('id_user') . "'
         ");
@@ -120,7 +119,7 @@ class Front extends CI_Controller
 
   public function count_chart()
   {
-    $jml_chart = $this->db->query("select count(*) as jml_chart from tb_temp_chart WHERE id_user='" . $this->session->userdata('id_user') . "'")->row()->jml_chart;
+    $jml_chart = $this->db->query("select count(*) as jml_chart from tb_temp_item WHERE id_user='" . $this->session->userdata('id_user') . "'")->row()->jml_chart;
     echo $jml_chart;
   }
 
@@ -131,7 +130,7 @@ class Front extends CI_Controller
     $data['item_order'] = $this->db->query("
         SELECT 
         A.id_barang, A.qty, A.harga, B.stock, B.nm_barang, (A.qty * A.harga) as sub_total
-        FROM tb_temp_chart A
+        FROM tb_temp_item A
         INNER JOIN tb_barang B ON A.id_barang = B.id_barang
         WHERE A.id_user='" . $this->session->userdata('id_user') . "'
         ")->result();
@@ -145,7 +144,7 @@ class Front extends CI_Controller
   {
     $this->db->where('id_barang', $this->input->post('id_barang'));
     $this->db->where('id_user', $this->session->userdata('id_user'));
-    $this->db->delete('tb_temp_chart');
+    $this->db->delete('tb_temp_item');
 
     $output = array("status" => "success", "message" => "Data Berhasil di Hapus");
     echo json_encode($output);
@@ -281,7 +280,7 @@ class Front extends CI_Controller
     ");
 
     $this->db->query("
-    DELETE FROM tb_temp_chart WHERE id_user = '" . $id_user . "'
+    DELETE FROM tb_temp_item WHERE id_user = '" . $id_user . "'
     ");
 
     $this->db->query("

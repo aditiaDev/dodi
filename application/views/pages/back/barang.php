@@ -29,13 +29,10 @@
                       <th>Kategori</th>
                       <th>ID Barang</th>
                       <th>Nama Barang</th>
-                      <th>Merk</th>
                       <th>Harga</th>
-                      <th>Unit</th>
+                      <th>Satuan</th>
                       <th>Berat (Kg)</th>
                       <th>Stock</th>
-                      <!-- <th>Foto</th> -->
-                      <th width="20%">Keterangan</th>
                       <th width="9%">Action</th>
                     </tr>
                   </thead>
@@ -84,7 +81,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label>Berat Barang (Kg)</label>
-                    <input type="text" class="form-control" name="berat_barang">
+                    <input type="text" class="form-control" name="berat">
                   </div>
                 </div>
                 <div class="col-sm-6">
@@ -225,24 +222,17 @@
           "data": "nm_barang"
         },
         {
-          "data": "merk"
-        },
-        {
           "data": "harga"
         },
         {
-          "data": "unit_pengukuran"
+          "data": "satuan"
         },
         {
-          "data": "berat_barang"
+          "data": "berat"
         },
         {
           "data": "stock"
         },
-        {
-          "data": "ket_barang"
-        },
-        // { "data": "foto"},
         {
           "data": null,
           "render": function(data) {
@@ -306,10 +296,9 @@
     $("[name='harga']").val(data.harga.replaceAll(".", ""))
     $("[name='stock']").val(data.stock)
     $("[name='id_kategori']").val(data.id_kategori)
-    $("[name='ket_barang']").val(data.ket_barang)
-    $("[name='merk']").val(data.merk)
-    $("[name='unit_pengukuran']").val(data.unit_pengukuran)
-    $("[name='berat_barang']").val(data.berat_barang)
+    $("[name='deskripsi']").val(data.deskripsi)
+    $("[name='satuan']").val(data.satuan)
+    $("[name='berat']").val(data.berat)
 
     $("#modal_add").modal('show')
   }

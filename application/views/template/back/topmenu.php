@@ -95,9 +95,17 @@
 						<b class="arrow"></b>
 					</li>
 					<li class="hover">
-						<a href="<?php echo base_url("master/point") ?>">
+						<a href="<?php echo base_url("master/setting_cross") ?>">
 							<i class="menu-icon fa fa-caret-right"></i>
-							Setting Point Pelanggan
+							Setting Cross Selling
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					<li class="hover">
+						<a href="<?php echo base_url("master/setting_up") ?>">
+							<i class="menu-icon fa fa-caret-right"></i>
+							Setting Up Selling
 						</a>
 
 						<b class="arrow"></b>
@@ -119,15 +127,6 @@
 				<b class="arrow"></b>
 
 				<ul class="submenu">
-
-					<li class="hover">
-						<a href="<?php echo base_url("transaksi/penjualan") ?>">
-							<i class="menu-icon fa fa-caret-right"></i>
-							Penjualan
-						</a>
-
-						<b class="arrow"></b>
-					</li>
 
 					<li class="hover">
 						<a href="<?php echo base_url("transaksi/datapenjualan") ?>">

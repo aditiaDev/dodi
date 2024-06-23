@@ -28,7 +28,7 @@ class Barang extends CI_Controller
   {
     $data['data'] = $this->db->query("
     SELECT B.nm_kategori, A.id_barang, A.id_kategori, A.nm_barang, 
-    A.harga, A.unit_pengukuran, A.foto_barang, A.ket_barang, A.stock, A.berat_barang 
+    A.harga, A.satuan, A.berat, A.deskripsi, A.stock, A.foto_barang 
     FROM tb_barang A 
     LEFT JOIN tb_kategori_barang B ON A.id_kategori = B.id_kategori
     ")->result();
@@ -81,11 +81,10 @@ class Barang extends CI_Controller
     $this->form_validation->set_rules('nm_barang', 'nm_barang', 'required|is_unique[tb_barang.nm_barang]');
     $this->form_validation->set_rules('id_kategori', 'id_kategori', 'required');
     $this->form_validation->set_rules('harga', 'harga', 'required|numeric');
-    $this->form_validation->set_rules('berat_barang', 'berat_barang', 'required|numeric');
-    $this->form_validation->set_rules('unit_pengukuran', 'unit_pengukuran', 'required');
+    $this->form_validation->set_rules('berat', 'berat', 'required|numeric');
+    $this->form_validation->set_rules('satuan', 'satuan', 'required');
     $this->form_validation->set_rules('stock', 'stock', 'required|numeric');
-    $this->form_validation->set_rules('merk', 'merk', 'required');
-    $this->form_validation->set_rules('ket_barang', 'ket_barang', 'required');
+    $this->form_validation->set_rules('deskripsi', 'deskripsi', 'required');
 
     if ($this->form_validation->run() == FALSE) {
       // echo validation_errors();
@@ -101,11 +100,10 @@ class Barang extends CI_Controller
       "id_kategori" => $this->input->post('id_kategori'),
       "nm_barang" => $this->input->post('nm_barang'),
       "harga" => $this->input->post('harga'),
-      "berat_barang" => $this->input->post('berat_barang'),
-      "unit_pengukuran" => $this->input->post('unit_pengukuran'),
+      "berat" => $this->input->post('berat'),
+      "satuan" => $this->input->post('satuan'),
       "stock" => $this->input->post('stock'),
-      "merk" => $this->input->post('merk'),
-      "ket_barang" => $this->input->post('ket_barang'),
+      "deskripsi" => $this->input->post('deskripsi'),
     );
 
     if (!empty($_FILES['foto']['name'])) {
@@ -125,11 +123,10 @@ class Barang extends CI_Controller
     $this->form_validation->set_rules('nm_barang', 'nm_barang', 'required');
     $this->form_validation->set_rules('id_kategori', 'id_kategori', 'required');
     $this->form_validation->set_rules('harga', 'harga', 'required|numeric');
-    $this->form_validation->set_rules('berat_barang', 'berat_barang', 'required|numeric');
-    $this->form_validation->set_rules('unit_pengukuran', 'unit_pengukuran', 'required');
+    $this->form_validation->set_rules('berat', 'berat', 'required|numeric');
+    $this->form_validation->set_rules('satuan', 'satuan', 'required');
     $this->form_validation->set_rules('stock', 'stock', 'required|numeric');
-    $this->form_validation->set_rules('merk', 'merk', 'required');
-    $this->form_validation->set_rules('ket_barang', 'ket_barang', 'required');
+    $this->form_validation->set_rules('deskripsi', 'deskripsi', 'required');
 
     if ($this->form_validation->run() == FALSE) {
       // echo validation_errors();
@@ -142,11 +139,10 @@ class Barang extends CI_Controller
       "id_kategori" => $this->input->post('id_kategori'),
       "nm_barang" => $this->input->post('nm_barang'),
       "harga" => $this->input->post('harga'),
-      "berat_barang" => $this->input->post('berat_barang'),
-      "unit_pengukuran" => $this->input->post('unit_pengukuran'),
+      "berat" => $this->input->post('berat'),
+      "satuan" => $this->input->post('satuan'),
       "stock" => $this->input->post('stock'),
-      "merk" => $this->input->post('merk'),
-      "ket_barang" => $this->input->post('ket_barang'),
+      "deskripsi" => $this->input->post('deskripsi'),
     );
 
     if (!empty($_FILES['foto']['name'])) {
