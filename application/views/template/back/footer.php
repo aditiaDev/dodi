@@ -51,7 +51,7 @@
 <script src="<?php echo base_url('/assets/toastr/toastr.min.js'); ?>"></script>
 <script src="<?php echo base_url(); ?>assets/template/back/assets/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/template/back/assets/js/jquery.dataTables.bootstrap.min.js"></script>
-
+<script src="<?php echo base_url(); ?>assets/js/summernote.min.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
 	function onlyNumberKey(evt) {
@@ -62,6 +62,8 @@
 			return false;
 		return true;
 	}
+
+
 
 	// jQuery(function($) {
 	//  var $sidebar = $('.sidebar').eq(0);

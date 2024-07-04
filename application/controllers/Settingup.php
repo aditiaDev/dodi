@@ -20,10 +20,11 @@ class Settingup extends CI_Controller
   public function getAllData()
   {
     $query = "SELECT A.id_setting_up, A.id_barang, A.id_barang_rujukan, 
-    B.nm_barang, C.nm_barang as nm_rujukan, A.biaya
+    B.nm_barang, C.nm_barang as nm_rujukan, A.biaya, A.type, A.min_beli,
+    CASE WHEN A.type = 0 Then 'Pemeblian Banyak' Else 'Referensi Barang Serupa' End as nm_type
     FROM tb_setting_up A
-    INNER JOIN tb_barang B ON A.id_barang = B.id_barang 
-    INNER JOIN tb_barang C ON A.id_barang_rujukan = C.id_barang";
+    LEFT JOIN tb_barang B ON A.id_barang = B.id_barang 
+    LEFT JOIN tb_barang C ON A.id_barang_rujukan = C.id_barang";
     $data['data'] = $this->db->query($query)->result();
     echo json_encode($data);
   }
@@ -40,7 +41,7 @@ class Settingup extends CI_Controller
 
     $this->load->library('form_validation');
     $this->form_validation->set_rules('id_barang', 'Barang', 'required');
-    $this->form_validation->set_rules('id_barang_rujukan', 'Barang Rujukan', 'required');
+    $this->form_validation->set_rules('type', 'type', 'required');
 
     if ($this->form_validation->run() == FALSE) {
       $output = array("status" => "error", "message" => validation_errors());
@@ -48,12 +49,27 @@ class Settingup extends CI_Controller
       return false;
     }
 
-    $data = array(
-      "id_barang" => $this->input->post('id_barang'),
-      "id_barang_rujukan" => $this->input->post('id_barang_rujukan'),
-      "biaya" => $this->input->post('biaya'),
-    );
-    $this->db->insert('tb_setting_up', $data);
+    $type = $this->input->post('type');
+
+    if ($type == 1) {
+      $data = array(
+        "id_barang" => $this->input->post('id_barang'),
+        "id_barang_rujukan" => $this->input->post('id_barang_rujukan'),
+        "biaya" => $this->input->post('biaya_rujukan'),
+        "type" => 1,
+      );
+      $this->db->insert('tb_setting_up', $data);
+    } else {
+      $data = array(
+        "id_barang" => $this->input->post('id_barang'),
+        "min_beli" => $this->input->post('min_beli'),
+        "biaya" => $this->input->post('biaya'),
+        "type" => 0,
+      );
+      $this->db->insert('tb_setting_up', $data);
+    }
+
+
     $output = array("status" => "success", "message" => "Data Berhasil Disimpan");
     echo json_encode($output);
   }

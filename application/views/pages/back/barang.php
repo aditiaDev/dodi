@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/summernote.min.css">
+
 <div class="main-content">
   <div class="main-content-inner">
     <div class="page-content">
@@ -119,7 +121,7 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label id="lbl_foto">Deskripsi</label>
-                    <textarea name="deskripsi" rows="5" class="form-control"></textarea>
+                    <textarea name="deskripsi" id="summernote" rows="5" class="form-control"></textarea>
                   </div>
                 </div>
               </div>
@@ -138,12 +140,19 @@
 
 
 <script src="<?php echo base_url(); ?>assets/template/back/assets/js/jquery-2.1.4.min.js"></script>
+
+
 <script>
   var save_method;
   var id_data;
   var tb_data;
 
+
+
   $(function() {
+    $('#summernote').summernote({
+      height: 350,
+    });
     REFRESH_DATA()
 
     $("[name='src_jenis']").change(function() {
@@ -285,7 +294,7 @@
   });
 
   function editData(data, index) {
-    console.log(data)
+    // console.log(data)
     save_method = "edit"
     id_data = data.id_barang;
     $("[name='foto']").val('')
@@ -296,7 +305,8 @@
     $("[name='harga']").val(data.harga.replaceAll(".", ""))
     $("[name='stock']").val(data.stock)
     $("[name='id_kategori']").val(data.id_kategori)
-    $("[name='deskripsi']").val(data.deskripsi)
+    // $("[name='deskripsi']").val(data.deskripsi)
+    $("[name='deskripsi']").summernote('code', data.deskripsi)
     $("[name='satuan']").val(data.satuan)
     $("[name='berat']").val(data.berat)
 

@@ -105,6 +105,7 @@
 	function createTable(result, sno) {
 		sno = Number(sno);
 		var row = "";
+
 		for (index in result) {
 			var content = result[index].nm_barang.replace(/<\/?[^>]+(>|$)/g, "");
 			if (content.length > 60)
@@ -113,6 +114,27 @@
 				row += "<div class='row'>";
 			}
 			sno += 1;
+			let rowRate = ""
+			let rating = result[index].average_rating
+			const maxRating = 5;
+			const fullStars = Math.floor(rating); // Bintang penuh
+			const halfStar = (rating - fullStars) >= 0.5 ? 1 : 0; // Bintang setengah
+			const emptyStars = maxRating - fullStars - halfStar; // Bintang kosong
+
+			// Menampilkan bintang penuh
+			for (let i = 0; i < fullStars; i++) {
+				rowRate += '<i class="fa fa-star"></i>';
+			}
+
+			// Menampilkan bintang setengah
+			if (halfStar) {
+				rowRate += '<i style="color: #D10024;" class="fa fa-star-half-o"></i>';
+			}
+
+			// Menampilkan bintang kosong
+			for (let i = 0; i < emptyStars; i++) {
+				rowRate += '<i class="fa fa-star-o"></i>';
+			}
 
 			row += "<div class='col-md-4 col-xs-6'>" +
 				"<div class='product'>" +
@@ -126,12 +148,7 @@
 				"<h3 class='product-name'><a href='<?php echo base_url('dtlProduct'); ?>/" + result[index].id_barang + "'>" + content + "</a></h3>" +
 				"<h4 class='product-price'>Rp. " + formatRupiah(result[index].harga, '') + "</h4>" +
 				"<div class='product-rating'>" +
-				"<i class='fa fa-star'></i>" +
-				"<i class='fa fa-star'></i>" +
-				"<i class='fa fa-star'></i>" +
-				"<i class='fa fa-star'></i>" +
-				"<i class='fa fa-star'></i>" +
-				"</div>" +
+				rowRate + "</div>" +
 				"</div>" +
 				"<div class='add-to-cart'>" +
 				"<button class='add-to-cart-btn' onclick=\"btnAddChart('" + result[index].id_barang + "', '" + result[index].harga + "')\"><i class='fa fa-shopping-cart'></i> add to cart</button>" +

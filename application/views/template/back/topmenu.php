@@ -136,7 +136,7 @@
 
 						<b class="arrow"></b>
 					</li>
-					<li class="hover">
+					<!-- <li class="hover">
 						<a href="<?php echo base_url("transaksi/barangmasuk") ?>">
 							<i class="menu-icon fa fa-caret-right"></i>
 							Barang Masuk
@@ -151,52 +151,10 @@
 						</a>
 
 						<b class="arrow"></b>
-					</li>
+					</li> -->
 				</ul>
 			</li>
 
-			<li class="<?= ($this->uri->segment(1) == 'complaint') ? 'active open' : '' ?> hover">
-				<a href="#" class="dropdown-toggle">
-					<i class="menu-icon fa fa-comments-o"></i>
-					<span class="menu-text">
-						CRM
-					</span>
-
-					<b class="arrow fa fa-angle-down"></b>
-				</a>
-
-				<b class="arrow"></b>
-
-				<ul class="submenu">
-
-					<li class="hover">
-						<a href="<?php echo base_url("complaint/usercomplaint") ?>">
-							<i class="menu-icon fa fa-caret-right"></i>
-							Customer Complaint
-						</a>
-
-						<b class="arrow"></b>
-					</li>
-
-					<li class="hover">
-						<a href="<?php echo base_url("complaint/kepuasan") ?>">
-							<i class="menu-icon fa fa-caret-right"></i>
-							Customer Feedback
-						</a>
-
-						<b class="arrow"></b>
-					</li>
-
-					<li class="hover">
-						<a href="<?php echo base_url("complaint/grafikcomplaint") ?>">
-							<i class="menu-icon fa fa-caret-right"></i>
-							Grafik Complaint
-						</a>
-
-						<b class="arrow"></b>
-					</li>
-				</ul>
-			</li>
 
 			<li class="<?= ($this->uri->segment(1) == 'laporan') ? 'active open' : '' ?> hover">
 				<a href="#" class="dropdown-toggle">
@@ -216,14 +174,6 @@
 						<a href="<?php echo base_url("laporan/penjualan") ?>">
 							<i class="menu-icon fa fa-caret-right"></i>
 							Laporan Penjualan
-						</a>
-
-						<b class="arrow"></b>
-					</li>
-					<li class="hover">
-						<a href="<?php echo base_url("laporan/complaint") ?>">
-							<i class="menu-icon fa fa-caret-right"></i>
-							Laporan Customer Complaint
 						</a>
 
 						<b class="arrow"></b>
